@@ -34,13 +34,52 @@ function Logprefix() {
 function Uninstall() {
 	Logprefix;echo ${CYELLOW}'[INFO]Uninstall AliYun services!'${CEND}
 	rm -rf /usr/sbin/aliyun*
+	
+	service cloudmonitor stop
+	service aegis stop
+	service agentwatch stop
+	
 	rm -rf /usr/local/share/aliyun-assist/
+	rm -rf /usr/local/aegis
+	rm -rf /usr/local/cloudmonitor
+	
+	systemctl stop aliyun.service
 	rm -rf /etc/systemd/system/aliyun.service
+	systemctl daemon-reload
+	
 	rm -rf /etc/init.d/agentwatch
+	rm -rf /etc/init.d/aegis
+	rm -rf /etc/init.d/cloudmonitor
+	
+	rm -rf /etc/rc.d/rc0.d/K01agentwatch
+	rm -rf /etc/rc.d/rc0.d/K80cloudmonitor
+
+	rm -rf /etc/rc.d/rc1.d/K01agentwatch
+	rm -rf /etc/rc.d/rc1.d/K80cloudmonitor
+	
+	rm -rf /etc/rc.d/rc2.d/S20cloudmonitor
+	rm -rf /etc/rc.d/rc2.d/S50aegis
 	rm -rf /etc/rc.d/rc2.d/S80aegis
+	rm -rf /etc/rc.d/rc2.d/S98agentwatch
+	
+	rm -rf /etc/rc.d/rc3.d/S20cloudmonitor
+	rm -rf /etc/rc.d/rc3.d/S50aegis
 	rm -rf /etc/rc.d/rc3.d/S80aegis
+	rm -rf /etc/rc.d/rc3.d/S98agentwatch
+	
+	rm -rf /etc/rc.d/rc4.d/S20cloudmonitor
+	rm -rf /etc/rc.d/rc4.d/S50aegis
 	rm -rf /etc/rc.d/rc4.d/S80aegis
+	rm -rf /etc/rc.d/rc4.d/S98agentwatch
+	
+	rm -rf /etc/rc.d/rc5.d/S20cloudmonitor
+	rm -rf /etc/rc.d/rc5.d/S50aegis
 	rm -rf /etc/rc.d/rc5.d/S80aegis
+	rm -rf /etc/rc.d/rc5.d/S98agentwatch
+	
+	rm -rf /etc/rc.d/rc6.d/K01agentwatch
+	rm -rf /etc/rc.d/rc6.d/K80cloudmonitor
+	
 	Logprefix;echo ${CMSG}'[SUCCESS]Uninstall AliYun services success!'${CEND}
 
 	Logprefix;echo ${CYELLOW}'[INFO]Install wget!'${CEND}
